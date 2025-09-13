@@ -85,11 +85,9 @@ The backend will be available at `http://localhost:5000`
 #### 3. Start PHP Frontend
 ```bash
 # For Professor interface
-php -S localhost:8000 professor.php
-
-# For Student interface (in separate terminal)
-php -S localhost:8001 student.php
+php -S localhost:8000
 ```
+access with /student.php and /professor.php
 
 ## 🔧 API Endpoints
 

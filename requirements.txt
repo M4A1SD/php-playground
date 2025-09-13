@@ -1,0 +1,7 @@
+sentence-transformers>=2.2.0
+torch>=1.9.0
+requests>=2.25.0
+llama-cpp-python
+huggingface-hub
+flask>=2.0.0
+flask-cors==5.0.1

@@ -36,7 +36,7 @@ def process():
         
         # Log the received data
         print(f"📝 Received student answer for question {question_id}")
-        print(f"📝 Answer length: {len(student_answer)} characters")
+
         
         # Find the question data
         question_data = None
@@ -67,8 +67,8 @@ def process():
             answer_key=answer_key
         )
         
-        # Grade the answer
-        print("🎯 Starting grading process...")
+      
+
         grading_result = grader.grade_answer(rubric, answer_key, student_answer)
         
         # Calculate final score

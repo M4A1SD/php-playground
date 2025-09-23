@@ -189,7 +189,7 @@ $currentQuestion = $_SESSION['current_question'];
                 
                 // Send data to backend
                 $.ajax({
-                    url: "http://localhost:5000/process",
+                    url: "http://localhost:5050/process",
                     type: "POST",
                     contentType: "application/json",
                     data: JSON.stringify({

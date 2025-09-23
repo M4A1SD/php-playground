@@ -140,5 +140,5 @@ def health_check():
     })
 
 if __name__ == "__main__":
-    print("Starting Flask server on http://localhost:5000")
-    app.run(host='localhost', port=5000, debug=True)
+    print("Starting Flask server on http://localhost:5050")
+    app.run(host='localhost', port=5050, debug=True)

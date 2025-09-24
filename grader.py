@@ -148,8 +148,8 @@ class RobustGrader:
     
     def _analyze_rubric_simple(self, rubric: str) -> Dict[str, int]:
         """
-        Step 1: Extract basic info from rubric with fallback
-        Uses simple prompts and regex fallbacks
+        Step 1: Extract basic info from rubric 
+        Uses simple prompts , and regex extraction
         """
         # Try LLM first with very simple prompt
         llm_result = self._call_ollama(f"""
@@ -256,7 +256,7 @@ class RobustGrader:
     
     def _grade_with_semantic_focus(self, student_key_parts: List[str], student_answer: str, rubric_info: Dict, answer_key_parts: List[str]) -> Dict:
         """
-        Step 3: Main grading logic - semantic similarity focused with intelligent part matching
+        Main grading logic - semantic similarity focused with intelligent part matching
         
         First matches student parts with answer key parts, then performs targeted comparison.
         """
@@ -279,6 +279,7 @@ class RobustGrader:
             return 0.0
     
     def _simple_llm_check(self, reference: str, student_text: str) -> bool:
+        # never used. I think it was LLM spam.
         """
         Very simple LLM check - just yes/no question
         """
@@ -308,13 +309,13 @@ class RobustGrader:
             print("⚠️ Warning: Missing answer key or student parts")
             return [0] * num_parts
             
-
+        # AND. case of just one point.
         if len(answer_key_parts) == 1 and len(student_key_parts) == 1:
             semantic_mapping = self._semantic_score_answers(answer_key_parts, student_key_parts)
             if semantic_mapping[0][0] > 0.8:
                 scores [0] = self.max_points
                 return scores
-       
+         #     not sure what this was for. leaving it for now before the demo as it works rn.
         if len(answer_key_parts) == 1 or len(student_key_parts) == 1:
             print("⚠️ Warning: Only one part detected, returning zero scores")
             return [0] * len(student_key_parts)
@@ -355,9 +356,6 @@ class RobustGrader:
 
         print(scores)
         return scores
-
-
-
     
     def _prepare_array(self, parts: List[str]) -> List[str]:
         """
@@ -374,7 +372,12 @@ class RobustGrader:
         return array
     
     def _semantic_score_answers(self, answer_key_parts: List[str], student_key_parts: List[str]) -> List[int]:
-        """Use semantic similarity to match parts"""
+        """
+        get dictionary of answers
+        process to get just values
+        turn to embeddings
+        create similarity matrix
+        """
 
         array1= self._prepare_array(student_key_parts)
         array2= self._prepare_array(answer_key_parts)
@@ -412,3 +415,31 @@ class RobustGrader:
 
       
   
+"""
+grader answer
+    _analyze_rubric_simple
+        call llm, and regex extract max points and num parts
+    split answers to parts with _split_answer_key
+        call llm, return json of sub parts of the full answer
+    _grade_with_semantic_focus
+        does nothing...
+        _score_answers
+            _semantic_score_answers
+                _prepare_array
+                    safe_json_loads
+                        unload json that has unescaped quotes
+                        fix_json_quotes
+                            extracts values from json
+                extracts raw data, into array.
+                encode to embeddings
+                create similarity matrix
+            save incorrect answer partrs
+            print scores
+_feedback
+    call llm and return feedback based on wrong answer parts
+"""
+
+"""
+theres are 3 LLM calls. price is ~ a cent per submition.
+
+"""

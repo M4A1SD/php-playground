@@ -99,6 +99,9 @@ def process():
             "status": "error"
         }), 500
 
+
+
+# this must be llm hallucination, because nobody uses this endpoint. can be deleted after demo day.
 @app.route("/questions", methods=["GET"])
 def get_questions():
     """

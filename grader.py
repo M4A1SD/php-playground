@@ -440,6 +440,7 @@ _feedback
 """
 
 """
-theres are 3 LLM calls. price is ~ a cent per submition.
+theres are 4 [ rubric 2 answer 1 feedback] LLM calls. price is ~ a cent per submition.\
+2 embeddings calls
 
 """

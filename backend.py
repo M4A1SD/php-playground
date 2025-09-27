@@ -69,7 +69,7 @@ def process():
         
       
 
-        grading_result = grader.grade_answer(rubric, answer_key, student_answer)
+        grading_result = grader._grade_answer(rubric, answer_key, student_answer)
         
         # Calculate final score
         total_score = sum(grading_result) if isinstance(grading_result, list) else 0

@@ -71,7 +71,7 @@ class RobustGrader:
             except Exception as e:
                 print(f"   LLM attempt {attempt + 1} failed: {e}")
                 
-        print("   🔴 All LLM attempts failed, using fallback logic")
+        print("    All LLM attempts failed, using fallback logic")
         return None
     
     def _grade_answer(self, rubric: str, answer_key: str, student_answer: str) -> Dict:
